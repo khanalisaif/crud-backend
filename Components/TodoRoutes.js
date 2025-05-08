@@ -1,5 +1,6 @@
 import express from 'express';
-import Todo from './Model.js';
+import Todo from './TodoModel.js';
+import authenticateUser from './Authentication.js';
 
 const router = express.Router();
 
@@ -14,10 +15,14 @@ router.post('/', async (req, res) => {
 
 
 
-router.get('/', async (req, res) => {
-  const todos = await Todo.find();
-  res.json(todos);
-});
+router.get('/',  async (req, res) => {
+  console.log("Inside gettodos route after authenticate ")
+
+  const {email} = req.body;
+  console.log("checking email", email)
+  const todos = await Todo.find({email});
+  res.json(todos); 
+}); 
 
 
 

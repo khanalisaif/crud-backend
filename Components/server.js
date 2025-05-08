@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import connectDB from './Db.js';
-import router from './Routes.js';
+import router from './TodoRoutes.js';
+import UserRouter from './UserRoutes.js';
 
 const app = express();
 const PORT = 5000;
@@ -13,7 +14,7 @@ app.use(cors());
 
 connectDB();
 
-
+app.use('/api/user', UserRouter);
 app.use('/api/todos', router);
 
 
